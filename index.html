@@ -11,14 +11,20 @@
 
 <div id="messages"></div>
 
+<!-- Username -->
 <input id="username" placeholder="Enter your name">
 <br><br>
+
+<!-- Message -->
+<input id="msg" placeholder="Type message">
+<br><br>
+
 <button onclick="send()">Send</button>
 
 <script>
 
 const supabaseUrl = "https://mwogkqpseyajukoczujs.supabase.co";
-const supabaseKey = "sb_publishable_xXJ29epOc0VbpKhDWxdtgg_FMnZanRt";
+const supabaseKey = "ArGqOTj5Rn0lEUWc";
 
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
@@ -34,7 +40,27 @@ await client
 
 document.getElementById("msg").value="";
 }
+
 async function load(){
+let { data } = await client
+.from("messages")
+.select("*");
+
+let html="";
+
+data.forEach(m=>{
+html += "<p>"+m.text+"</p>";
+});
+
+document.getElementById("messages").innerHTML = html;
+}
+
+setInterval(load,1000);
+
+</script>
+
+</body>
+</html>async function load(){
 let { data } = await client
 .from("messages")
 .select("*");
