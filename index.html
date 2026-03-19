@@ -20,6 +20,7 @@
 <button onclick="send()">Send</button>
 
 <script>
+<script>
 
 const supabaseUrl = "https://mwogkqpseyajukoczujs.supabase.co";
 const supabaseKey = "sb_publishable_xXJ29epOc0VbpKhDWxdtgg_FMnZanRt";
@@ -48,6 +49,7 @@ let html="";
 
 data.forEach(m=>{
 html += "<div style='background:#dcf8c6;padding:8px;margin:5px;border-radius:10px;width:fit-content;'>"+m.text+"</div>";
+});
 
 document.getElementById("messages").innerHTML = html;
 }
