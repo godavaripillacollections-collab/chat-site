@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Chat</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+<h2>Online Chat</h2>
+
+<div id="messages"></div>
+
+<input id="msg" placeholder="Type message">
+<button onclick="send()">Send</button>
+
+<script>
+
+const supabaseUrl = "https://mwogkqpseyajukoczujs.supabase.co";
+const supabaseKey = "sb_publishable_xXJ29epOc0VbpKhDWxdtgg_FMnZanRt";
+
+const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+async function send(){
+let message = document.getElementById("msg").value;
+
+await client
+.from("messages")
+.insert([{ text: message }]);
+
+document.getElementById("msg").value="";
+}
+
+async function load(){
+let { data } = await client
+.from("messages")
+.select("*");
+
+let html="";
+
+data.forEach(m=>{
+html += "<p>"+m.text+"</p>";
+});
+
+document.getElementById("messages").innerHTML = html;
+}
+
+setInterval(load,1000);
+
+</script>
+
+</body>
+</html>
