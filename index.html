@@ -33,16 +33,16 @@ async function send(){
   if(message=="" || user=="") return;
 
   await client
-  .from("messages")
-  .insert([{ text: user + ": " + message }]);
+    .from("messages")
+    .insert([{ text: user + ": " + message }]);
 
   document.getElementById("msg").value="";
 }
 
 async function load(){
   let { data } = await client
-  .from("messages")
-  .select("*");
+    .from("messages")
+    .select("*");
 
   let html="";
 
@@ -51,31 +51,6 @@ async function load(){
   });
 
   document.getElementById("messages").innerHTML = html;
-}
-
-setInterval(load,1000);
-
-</script>
-
-</body>
-</html>.from("messages")
-.insert([{ text: user + ": " + message }]);
-
-document.getElementById("msg").value="";
-}
-
-async function load(){
-let { data } = await client
-.from("messages")
-.select("*");
-
-let html="";
-
-data.forEach(m=>{
-html += "<div style='background:#dcf8c6;padding:8px;margin:5px;border-radius:10px;width:fit-content;'>"+m.text+"</div>";
-});
-
-document.getElementById("messages").innerHTML = html;
 }
 
 setInterval(load,1000);
