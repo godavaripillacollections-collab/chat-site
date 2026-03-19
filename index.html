@@ -11,11 +11,9 @@
 
 <div id="messages"></div>
 
-<!-- Username -->
 <input id="username" placeholder="Enter your name">
 <br><br>
 
-<!-- Message -->
 <input id="msg" placeholder="Type message">
 <br><br>
 
@@ -42,25 +40,6 @@ document.getElementById("msg").value="";
 }
 
 async function load(){
-let { data } = await client
-.from("messages")
-.select("*");
-
-let html="";
-
-data.forEach(m=>{
-html += "<p>"+m.text+"</p>";
-});
-
-document.getElementById("messages").innerHTML = html;
-}
-
-setInterval(load,1000);
-
-</script>
-
-</body>
-</html>async function load(){
 let { data } = await client
 .from("messages")
 .select("*");
