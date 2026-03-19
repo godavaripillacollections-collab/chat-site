@@ -47,8 +47,7 @@ let { data } = await client
 let html="";
 
 data.forEach(m=>{
-html += "<p>"+m.text+"</p>";
-});
+html += "<div style='background:#dcf8c6;padding:8px;margin:5px;border-radius:10px;width:fit-content;'>"+m.text+"</div>";
 
 document.getElementById("messages").innerHTML = html;
 }
