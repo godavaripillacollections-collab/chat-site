@@ -20,7 +20,6 @@
 <button onclick="send()">Send</button>
 
 <script>
-<script>
 
 const supabaseUrl = "https://mwogkqpseyajukoczujs.supabase.co";
 const supabaseKey = "sb_publishable_xXJ29epOc0VbpKhDWxdtgg_FMnZanRt";
@@ -28,13 +27,38 @@ const supabaseKey = "sb_publishable_xXJ29epOc0VbpKhDWxdtgg_FMnZanRt";
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function send(){
-let message = document.getElementById("msg").value;
-let user = document.getElementById("username").value;
+  let message = document.getElementById("msg").value;
+  let user = document.getElementById("username").value;
 
-if(message=="" || user=="") return;
+  if(message=="" || user=="") return;
 
-await client
-.from("messages")
+  await client
+  .from("messages")
+  .insert([{ text: user + ": " + message }]);
+
+  document.getElementById("msg").value="";
+}
+
+async function load(){
+  let { data } = await client
+  .from("messages")
+  .select("*");
+
+  let html="";
+
+  data.forEach(m=>{
+    html += "<div style='background:#dcf8c6;padding:8px;margin:5px;border-radius:10px;width:fit-content;'>"+m.text+"</div>";
+  });
+
+  document.getElementById("messages").innerHTML = html;
+}
+
+setInterval(load,1000);
+
+</script>
+
+</body>
+</html>.from("messages")
 .insert([{ text: user + ": " + message }]);
 
 document.getElementById("msg").value="";
