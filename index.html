@@ -101,8 +101,19 @@ async function load(){
   document.getElementById("messages").scrollTop =
   document.getElementById("messages").scrollHeight;
 }
+  client
+.channel('chat-room')
+.on(
+  'postgres_changes',
+  { event: 'INSERT', schema: 'public', table: 'messages' },
+  payload => {
+    load();
+  }
+)
+.subscribe();
 
-setInterval(load,1000);
+load();
+
 
 </script>
 
